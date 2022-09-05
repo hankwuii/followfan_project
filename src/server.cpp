@@ -3,22 +3,22 @@
 #include <iostream>
 using namespace std;
 
-bool add(rospy_tutorials::AddTwoInts::Request  &req,
-         rospy_tutorials::AddTwoInts::Response &res)
+bool division(server::mysrv::Request  &req,
+              server::mysrv::Response &res)
  {
-   res.step = req.a / 1.8;
-   ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
-   ROS_INFO("sending back response: [%ld]", (long int)res.step);
+   res.step = req.b / 1.8;
+   ROS_INFO("Request: x=%ld, y=%ld", (string)req.a, (long int)req.b);
+   ROS_INFO("sending back response: [%ld]", (float)res.step);
    return true;
  }
 
 int main(int argc, char** argv)
  {
-   ros::init(argc, argv, "add_two_ints_server"); //初始化node
+   ros::init(argc, argv, "motor_rotate_server"); //初始化node
    ros::NodeHandle n; // node handler
 
-   ros::ServiceServer service = n.advertiseService("add_two_ints", add); //定義service server以及callback function
-   ROS_INFO("Ready to add two ints.");
+   ros::ServiceServer service = n.advertiseService("motor_rotate", division); //定義service server以及callback function
+   ROS_INFO("Ready to act.");
    ros::spin(); //持續運行此node
 
    return 0;
