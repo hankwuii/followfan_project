@@ -1,4 +1,0 @@
-int64 direction
-int64 angle
----
-bool get_data
